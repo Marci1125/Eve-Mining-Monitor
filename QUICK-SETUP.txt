@@ -1,0 +1,31 @@
+EVE MINING 1.0 - QUICK SETUP
+Tool created by Marcel Ijonen [NO.W8]
+
+1. Extract the complete ZIP to a writable folder. Start EVE-Mining.exe.
+2. Open Fleet / prices. Select your EVE logs/Gamelogs folder if necessary.
+3. Click Add pilots from logs to import characters.
+4. Select each character's ship class.
+5. Enter its actual in-game cargo capacity, including skills/fitting.
+6. Set expected Lasers: usually 2 for barges/exhumers; 0 for boosters.
+7. Raw cycle (s): the slower unboosted laser cycle, or 0 for auto.
+8. Enter a profile name, select ICE or ORE, and Save and activate profile.
+9. Confirm cargo: Reset if empty. Otherwise right-click the pilot to set
+   current cargo or confirm the displayed value if it already matches EVE.
+
+The app uses English EVE mining/combat messages.
+186 BUY prices are included as a dated snapshot, not live prices.
+Existing personal BUY prices are kept. Update via Prices / Janice when needed.
+No EVE account login is required.
+
+AFTER TRANSFERS / JETTISON: Reset the emptied ship, or set remaining cargo.
+AFTER UNLOADING THE FLEET: Reset all clears cargo counters, not income.
+PAUSE: automatic after 5 minutes without mining; next yield resumes.
+NEW SESSION: clears income/session time and retains actual cargo counters.
+ATTACK SOUND: checkbox mutes/unmutes the incoming-attack tone.
+VERSION / CREATOR: shown at the bottom; click Quick setup for this guide.
+
+SAVE / UPDATE
+Keep EVE-Ice-Monitor.state.json: it contains your profiles and session.
+For later updates: close the app, keep a copy of that state file, and replace
+program files with the complete new release. Do not replace your state with
+someone else's state file. The share ZIP contains no personal profiles.

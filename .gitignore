@@ -1,0 +1,12 @@
+# Personal runtime data - never commit
+EVE-Ice-Monitor.state.json*
+EVE-Mining-Prices.json*
+EVE-Mining-Price-Overrides.json*
+EVE-Mining-Buy-Seed.json*
+*.tmp
+*.log
+*.bak
+*.v2-backup
+Current-Ice-Belt-Scan.txt
+
+
