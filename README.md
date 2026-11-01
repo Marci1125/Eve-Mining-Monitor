@@ -1,6 +1,6 @@
 # EVE Mining
 
-**Version 1.0** — Tool created by **Marcel Ijonen [NO.W8]**.
+**Version 1.0**.
 
 A compact Windows overlay for tracking multiple EVE Online mining characters.
 
