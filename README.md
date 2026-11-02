@@ -1,71 +1,51 @@
 # EVE Mining
+**V2.0 — Python edition**
 
-**Version 1.0**.
-
-A compact Windows overlay for tracking multiple EVE Online mining characters.
-
-<img src="Corp-Logo.png" alt="NO.W8 corporation logo" width="96">
+A compact Windows monitor for multiple EVE Online mining characters.
 
 ## Download
+[Download EVE Mining V2.0](https://github.com/Marci1125/Eve-Mining-Monitor/raw/refs/heads/main/EVE-Mining-V2.0-Python-Share.zip)
 
-[Download EVE-Mining-1.0.zip](https://github.com/Marci1125/Eve-Mining-Monitor/raw/refs/heads/main/releases/EVE-Mining-1.0.zip)
-Extract the complete ZIP into a writable folder, then run **EVE-Mining.exe**.
-Keep all included files together. No EVE account login is required.
-
-## Features
-
-- Separate Ice / Ore cargo tracking with the correct item volumes
-- Fleet profiles with individual ship classes, cargo capacity and laser settings
-- Compression detection, remaining cargo capacity and estimated time until full
-- Fleet-wide free ice-block capacity, excluding boost ships
-- Estimated mining value and ISK/hour using imported Janice BUY prices
-- Automatic session pause after five minutes without mining; next yield resumes
-- Incoming-attack sound with a mute option
-- Critical-yield highlighting and irregular-mining hints
+Extract the complete ZIP into a writable local folder and run **EVE-Mining.exe**.
+Keep **Sounds**, **Licenses** and the included documentation together.
+Python is bundled; no Python installation, installer or administrator rights are required.
 
 ## Quick setup
+1. Open **Fleet / prices > Fleet profiles** and select your local EVE **Gamelogs** folder.
+2. Click **Add pilots from logs**, then double-click each pilot to edit.
+3. Set ship class, actual in-game hold capacity, expected lasers and raw unboosted cycle.
+4. Name your profile, choose **ICE / ORE**, then **Save and activate profile**.
+5. Confirm starting cargo: **Reset** if empty, or right-click the pilot to set/confirm it.
+6. Under **Alerts**, choose and test local cargo/attack sounds, then save.
 
-1. Start EVE Mining and open **Fleet / prices**.
-2. Select your EVE **logs/Gamelogs** folder and click **Add pilots from logs**.
-3. Select ship classes and enter each character's actual in-game cargo capacity.
-4. Set expected **Lasers** (usually 2 for barges/exhumers, 0 for boosters).
-5. Set **Raw cycle (s)** to the slower unboosted laser cycle, or 0 for auto.
-6. Name the profile, select ICE / ORE, and **Save and activate profile**.
-7. Confirm the initial cargo. Reset if empty; otherwise right-click to set/confirm it.
+English EVE mining/combat log notifications are required.
 
-EVE mining/combat notifications must be in English.
-The release includes 186 creator-supplied BUY prices as a dated snapshot.
-Prices are not live; update them through **Prices / Janice** when desired.
+## Features
+- ICE and ORE cargo tracking with material-specific volumes and logged compression.
+- Saved fleet profiles, individual hold capacities and reset controls.
+- Red cargo warning at 95%, 30-second critical-yield highlighting and estimated time to full.
+- Fleet free capacity excluding booster ships.
+- Configurable cargo-threshold and incoming-attack sounds; add MP3/WAV files to **Sounds**.
+- Mining activity hints that account for observed boosts and unequal laser cycles.
+- Estimated income from compressed-item **BUY** quotes; 186 dated default prices and manual imports.
+- Automatic pause after five minutes without mining; the next mining yield resumes.
+- Headline ISK/h updates every 60 seconds, or on session/pause changes.
 
-## Important behavior
+Transfers, jettison and station unloading are not logged: reset cargo or correct the remaining volume manually.
+**New session** clears income/time while retaining cargo counters.
+Income, activity hints and ETA are estimates. Prices are not live.
 
-Transfers, jettison and station unloading are not automatically inferred.
-Use a character's **Reset**, **Reset all**, or a manual remaining-cargo correction.
-Compression updates cargo volume without counting mining income twice.
-Mining value is an estimate based on compressed-item BUY quotes, before fees.
-ETA and irregular-mining messages are estimates derived from log events.
-The program does not control EVE or automate gameplay.
+## Local operation
+The application reads the configured local gamelogs and does not control EVE or automate gameplay.
+It has no application network client, browser launch or automatic updater.
+Python, Tkinter and PyInstaller are used; the one-file bootloader temporarily extracts its runtime at startup.
+Windows provides normal UI, file and audio services. OneDrive synchronization remains independent.
 
-**New session** resets income and time while retaining actual cargo counters.
-Automatic pauses exclude the paused interval from ISK/hour.
+## Personal data and updates
+Profiles, cargo, prices and session are saved in **EVE-Mining.python-state.json** beside the EXE.
+Keep this file when updating; do not upload it or its backups.
+To migrate from the C# edition, copy **EVE-Mining.native-state.json** beside the new EXE before first use.
+The Python edition imports that file only if no Python state exists and leaves the original unchanged.
 
-## Requirements
-
-- Windows with Windows PowerShell 5.1 and .NET Framework 4.8
-- Local EVE Online game logs with English notifications
-
-## Updates and personal data
-
-Close EVE Mining before replacing program files with a complete newer release.
-Keep a backup of **EVE-Ice-Monitor.state.json**: it contains your profiles,
-cargo counters, custom prices and session. Do not upload this file to GitHub.
-The release ZIP excludes personal profiles and session data.
-
-## Source / build
-
-The release includes the PowerShell source, the C# GUI launcher and
-**Build-EVE-Mining.ps1**. Use Windows PowerShell to rebuild the launcher.
-See **README-EVE-Mining-Monitor.txt** for detailed behavior and data sources.
-
-Corp logo supplied by the creator. EVE Online item data comes from CCP's
-Static Data Export; Janice prices are imported by the user.
+The downloadable ZIP contains no personal profiles or session data.
+The full usage guide and third-party notices are included in the ZIP.

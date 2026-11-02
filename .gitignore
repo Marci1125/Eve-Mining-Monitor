@@ -9,4 +9,13 @@ EVE-Mining-Buy-Seed.json*
 *.v2-backup
 Current-Ice-Belt-Scan.txt
 
-
+# Native/Python personal state and local instance locks
+EVE-Mining.native-state.json*
+EVE-Mining.python-state.json*
+.python-instance.lock
+.instance.lock
+Compressed-items.txt
+__pycache__/
+build/
+dist/
+*.spec
