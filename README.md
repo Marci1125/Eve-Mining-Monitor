@@ -1,14 +1,22 @@
 # EVE Mining
-**V2.0 — Python edition**
+**V2.1 — Python edition**
 
 A compact Windows monitor for multiple EVE Online mining characters.
 
 ## Download
-[Download EVE Mining V2.0](https://github.com/Marci1125/Eve-Mining-Monitor/raw/refs/heads/main/EVE-Mining-V2.0-Python-Share.zip)
+[Download EVE Mining V2.1](https://github.com/Marci1125/Eve-Mining-Monitor/raw/refs/heads/main/EVE-Mining-V2.1-Python-Share.zip)
 
 Extract the complete ZIP into a writable local folder and run **EVE-Mining.exe**.
 Keep **Sounds**, **Licenses** and the included documentation together.
 Python is bundled; no Python installation, installer or administrator rights are required.
+
+## New in V2.1
+- Separate **Cargo volume** and **Attack volume** sliders, from 0–100%.
+- Both default to **20%**; save the levels with **Save alert settings**.
+- Test sounds and real alerts use the same levels; a running preview can be adjusted directly.
+- Both bundled attack alarms are **four seconds** long, with a short fade-out.
+- Existing selections of the old bundled MP3 alarms map to the shortened WAV files.
+- Existing Python profiles, cargo, session, prices and sound preferences are preserved.
 
 ## Quick setup
 1. Open **Fleet / prices > Fleet profiles** and select your local EVE **Gamelogs** folder.
