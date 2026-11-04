@@ -1,22 +1,36 @@
 # EVE Mining
-**V2.1 — Python edition**
+**V2.3 — Python edition**
 
 A compact Windows monitor for multiple EVE Online mining characters.
 
 ## Download
-[Download EVE Mining V2.1](https://github.com/Marci1125/Eve-Mining-Monitor/raw/refs/heads/main/EVE-Mining-V2.1-Python-Share.zip)
+[Download EVE Mining V2.3](https://github.com/Marci1125/Eve-Mining-Monitor/raw/refs/heads/main/EVE-Mining-V2.3-Python-Share.zip)
 
 Extract the complete ZIP into a writable local folder and run **EVE-Mining.exe**.
 Keep **Sounds**, **Licenses** and the included documentation together.
 Python is bundled; no Python installation, installer or administrator rights are required.
 
-## New in V2.1
-- Separate **Cargo volume** and **Attack volume** sliders, from 0–100%.
-- Both default to **20%**; save the levels with **Save alert settings**.
-- Test sounds and real alerts use the same levels; a running preview can be adjusted directly.
-- Both bundled attack alarms are **four seconds** long, with a short fade-out.
-- Existing selections of the old bundled MP3 alarms map to the shortened WAV files.
-- Existing Python profiles, cargo, session, prices and sound preferences are preserved.
+## New since V2.1
+
+- Cargo bars turn orange at your configured alert threshold.
+- A bright frame marks each new cargo alert for five seconds.
+- Recent mining cycles are compared with your unboosted cycle times to estimate the boost.
+
+## Screenshots
+
+The screenshots use fictional pilots and simulated mining data.
+
+**Fleet overview**
+
+![Demo ice fleet and estimated Porpoise boost](screenshots/01-Flottenuebersicht.png)
+
+**Cargo alerts**
+
+![Orange cargo bars and highlighted recent alerts](screenshots/02-Cargo-Alarm.png)
+
+**Sound settings**
+
+![Independent cargo and attack volumes](screenshots/03-Sound-Einstellungen.png)
 
 ## Quick setup
 1. Open **Fleet / prices > Fleet profiles** and select your local EVE **Gamelogs** folder.
