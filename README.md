@@ -2,7 +2,7 @@
 
 **V2.14 — Python edition**
 
-A compact Windows monitor for multiple EVE Online mining characters. Track holds, estimated income and reprocessing products from English game logs.
+A compact Windows monitor for multiple EVE Online mining characters. Track holds, estimated income and reprocessing products from **English game logs**.
 
 ## Download
 
