@@ -12,13 +12,13 @@ Extract the complete ZIP into a writable local folder and run **EVE-Mining.exe**
 
 The share package starts without personal profiles, session data or a configured log path. It includes the dated default BUY-price snapshot. Prices are not live.
 
-## New since V2.10
+## What changed from V2.10 to V2.14
 
-- **Style C — Fleet Strip** shows cargo fill, ETA and recent yields in shallow colored tiles. The example below shows 14 pilots at once.
-- **Style B — Gauges** shows a centered cargo gauge for each pilot. A recent yield briefly replaces the percentage. **Style A — Bars** offers a compact row view with cargo details.
-- Choose a view under **Options > Display Style**. The app remembers your selection.
-- ICE holds show **100%** when another whole block cannot fit. **Miners free** shows remaining and total fleet capacity and excludes boosters.
-- Optional **Auto-reset cargo after unloading** uses a sequence of mining, fleet warp and hangar log entries. Enable it in **Options > Fleet profiles** if you unload the entire hold.
+- **V2.11 — Compact layout.** Shorter header and pilot rows. Larger fleets use multiple columns so pilots stay visible without scrolling. **Expand** shows cycle details.
+- **V2.12 and V2.12.1 — Optional cargo auto-reset.** A mining yield, fleet warp and matching hangar notification can reset a pilot's hold once. Final yields during the first ten seconds after the warp notification are accepted. Later mining requires a new warp. Enable the option in **Options > Fleet profiles** if you unload the entire hold.
+- **V2.13 — Two display styles and clearer cargo status.** **Style A — Bars** and **Style B — Gauges** are selectable under **Options > Display Style**. ICE holds show **100%** when another whole block cannot fit. **Miners free** shows remaining and total capacity with warning colors. Boost estimates keep the previous ship label while observed cycle times still match it.
+- **V2.13.1 and V2.13.2 — Layout fixes and smaller gauges.** Fixed the initial window width and missing pilot rows when switching from gauges to bars. Compact gauge cards are smaller and center the percentage or recent yield inside the gauge.
+- **V2.14 — Style C, Fleet Strip.** Shallow colored cargo tiles show fill, ETA, recent yields and Reset. Hover for detailed cargo and cycle information. The app remembers the selected style. The example below shows 14 pilots at once.
 
 ## Reprocessing and prices
 
