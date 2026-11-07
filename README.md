@@ -1,18 +1,26 @@
 # EVE Mining
 
-**V2.10 — Python edition**
+**V2.14 — Python edition**
 
 A compact Windows monitor for multiple EVE Online mining characters. Track holds, estimated income and reprocessing products from English game logs.
 
 ## Download
 
-[Download EVE Mining V2.10](https://github.com/Marci1125/Eve-Mining-Monitor/raw/refs/heads/main/EVE-Mining-V2.10-Python-Share.zip)
+[Download EVE Mining V2.14](https://github.com/Marci1125/Eve-Mining-Monitor/raw/refs/heads/main/EVE-Mining-V2.14-Python-Share.zip)
 
 Extract the complete ZIP into a writable local folder and run **EVE-Mining.exe**. Keep **Sounds**, **Licenses** and the included documentation together. Python is bundled; no Python installation or administrator rights are required.
 
 The share package starts without personal profiles, session data or a configured log path. It includes the dated default BUY-price snapshot. Prices are not live.
 
-## New since V2.3
+## New since V2.10
+
+- **Style C — Fleet Strip** shows cargo fill, ETA and recent yields in shallow colored tiles. The example below shows 14 pilots at once.
+- **Style B — Gauges** shows a centered cargo gauge for each pilot. A recent yield briefly replaces the percentage. **Style A — Bars** offers a compact row view with cargo details.
+- Choose a view under **Options > Display Style**. The app remembers your selection.
+- ICE holds show **100%** when another whole block cannot fit. **Miners free** shows remaining and total fleet capacity and excludes boosters.
+- Optional **Auto-reset cargo after unloading** uses a sequence of mining, fleet warp and hangar log entries. Enable it in **Options > Fleet profiles** if you unload the entire hold.
+
+## Reprocessing and prices
 
 - **Reprocess** estimates products from the current session using 462 bundled recipes, complete batches and an adjustable yield. The default is **90.63%**. Product icons for all 43 possible outputs are bundled for offline use.
 - Input and output tables show quantity, volume and available BUY/SELL valuations. Imported BUY prices take priority over the dated example quotes. Missing prices stay unpriced and partial totals are marked.
@@ -24,11 +32,19 @@ The share package starts without personal profiles, session data or a configured
 
 All screenshots use fictional pilots and simulated mining data. Example prices are dated snapshots.
 
-### Fleet overview
+### Style A — Bars
 
 Each pilot has a hold bar, remaining capacity, estimated time to full and an individual reset. The header shows total free space for miners and a boost estimate based on observed log intervals.
 
-![V2.10 fleet overview with neutral pilots](screenshots/01-Flottenuebersicht.png)
+![V2.14 fleet overview with neutral pilots](screenshots/01-Flottenuebersicht.png)
+
+### Style B — Gauges
+
+![V2.14 cargo gauges with percentages and recent yields](screenshots/06-Style-B.png)
+
+### Style C — Fleet Strip
+
+![V2.14 Fleet Strip with 14 fictional pilots and colored cargo tiles](screenshots/07-Style-C-14-pilots.png)
 
 ### Cargo alerts and recent mining yields
 
@@ -56,7 +72,7 @@ Choose separate cargo and attack sounds, adjust each volume and save. Add your o
 
 ## Quick setup
 
-1. Open **Fleet / prices > Fleet profiles** and select your local EVE **Gamelogs** folder.
+1. Open **Options > Fleet profiles** and select your local EVE **Gamelogs** folder.
 2. Click **Add pilots from logs**, then double-click each pilot to edit.
 3. Set ship class, actual in-game hold capacity, expected lasers and raw unboosted cycle. A cycle of **0** enables automatic learning.
 4. Name your profile, choose **ICE / ORE**, then **Save and activate profile**.
@@ -70,17 +86,17 @@ English EVE mining/combat log notifications are required. Update prices manually
 
 - ICE and ORE cargo tracking with material-specific volumes and logged compression.
 - Estimated income values raw mined units using matching compressed-item **BUY** quotes at 1:1. Compressing cargo does not count income twice.
-- Critical yields highlight the hold bar for 30 seconds.
+- Critical yields highlight the hold indicator for 30 seconds.
 - Mining activity hints account for observed boosts and unequal laser cycles. Boost identification and ETA are estimates based on past log entries, with a delay when conditions change.
 - Incoming-attack and cargo-threshold sound notifications have independent volume settings.
 - Automatic session pause after five minutes without mining; the next mining yield resumes.
 - Headline ISK/h updates every 60 seconds, or on session/pause changes.
 
-Transfers, jettison and station unloading are not logged. Reset cargo after unloading or correct the remaining volume manually. **New session** clears income/time while retaining cargo counters. Reprocessing uses session totals, including mined material already unloaded.
+Reset cargo after unloading or correct the remaining volume manually when needed. Automatic reset assumes the entire hold was unloaded after the matching hangar notification. **New session** clears income/time while retaining cargo counters. Reprocessing uses session totals, including mined material already unloaded.
 
 ## Updating and personal data
 
-Close the old version before updating. Keep **EVE-Mining.python-state.json** from your current folder and copy it beside the new EXE before first launch. This preserves profiles, prices, cargo, sound preferences and the session. Keep the current Sounds folder if you added custom files.
+Close the old version before updating. Keep **EVE-Mining.python-state.json** from your current folder and copy it beside the new EXE before first launch. This preserves profiles, prices, cargo, sound preferences and the session. V2.14 also remembers the selected display style. Keep the current Sounds folder if you added custom files.
 
 Do not share either **EVE-Mining.python-state.json** or **EVE-Mining.native-state.json**, their backups/temporary files or **.python-instance.lock**. Use the blank share ZIP instead.
 
@@ -94,4 +110,3 @@ Python, Tkinter and PyInstaller are used. The one-file bootloader temporarily ex
 
 The ZIP includes **CHECKSUMS.txt**, a usage guide and third-party license notices. Reprocessing data and additional product icons originate from CCP's EVE static data and Image Server. Keep **Licenses** with redistributed copies.
 
-From this release, small fixes use a third version component such as **2.10.1**. Larger feature updates use **2.11**, **2.12**, and so on.
