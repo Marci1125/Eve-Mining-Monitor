@@ -1,13 +1,13 @@
 # EVE Mining Monitor
 
-**V2.16 · Windows and macOS Beta**
+**V2.18 · Windows and macOS**
 
-Track cargo, estimated mining income and reprocessing products across multiple EVE Online pilots. V2.16 reads English and German Gamelogs.
+Track cargo, estimated mining income and reprocessing products across multiple EVE Online pilots. V2.18 reads English and German Gamelogs. Choose the interface language under **Options → Languages** and restart.
 
 | Platform | Download | Start |
 | --- | --- | --- |
-| Windows | [V2.16 Windows ZIP](https://github.com/Marci1125/Eve-Mining-Monitor/raw/refs/heads/main/EVE-Mining-V2.16-Python-Share.zip) | Extract the ZIP and run **EVE-Mining.exe**. Python is bundled. No Python installation or administrator rights are required. |
-| macOS (Beta) | [V2.16 macOS ZIP](https://github.com/Marci1125/Eve-Mining-Monitor/raw/refs/heads/main/EVE-Mining-V2.16-macOS-Beta.zip) | Install [Python 3.12 with Tk](https://www.python.org/downloads/macos/), extract the ZIP and open **Start EVE Mining.command**. The first launch installs the audio dependency into a local environment. |
+| Windows | [V2.18 Windows ZIP](https://github.com/Marci1125/Eve-Mining-Monitor/raw/refs/heads/main/EVE-Mining-V2.18-Python-Share.zip) | Extract the ZIP and run **EVE-Mining.exe**. Python is bundled. No Python installation or administrator rights are required. |
+| macOS | [V2.18 macOS ZIP](https://github.com/Marci1125/Eve-Mining-Monitor/raw/refs/heads/main/EVE-Mining-V2.18-macOS.zip) | Install [Python 3.12 with Tk](https://www.python.org/downloads/macos/), extract the ZIP and open **Start EVE Mining.command**. The first launch installs the audio dependency into a local environment. |
 
 Extract the complete ZIP into a writable folder and keep the included files together. Both packages start with blank fleet profiles and no configured Gamelogs folder.
 
@@ -18,23 +18,24 @@ Extract the complete ZIP into a writable folder and keep the included files toge
    ![Fleet profiles showing a selected Gamelogs folder and the Log folder button](screenshots/01-gamelogs-folder.png)
 
    The example path is `C:\User\Documents\Eve\logs\gamelogs`. Choose the folder where your EVE client actually writes its logs, which may be under OneDrive or a localized Documents folder.
-2. Click **Add pilots from logs**. Double-click each pilot and set their ship class, actual in-game hold capacity, number of lasers and raw unboosted cycle time. Enter the capacity shown in EVE for that character, since skills and ship choice can change it. Set lasers to **0** for a boost-only ship. A raw cycle of **0** enables automatic learning.
+2. Click **Add pilots from logs**. Select several pilots and click **Edit selected**, or double-click one pilot. Set the ship class, actual in-game hold capacity, number of lasers and raw unboosted cycle time. Enter the capacity shown in EVE for that character, since skills and ship choice can change it. Set lasers to **0** for a boost-only ship. A raw cycle of **0** enables automatic learning.
 3. Name your profile, choose **ICE** or **ORE**, and click **Save and activate profile**.
-4. Confirm each pilot's starting cargo. Click **Reset** if the hold is empty, or right-click the pilot to enter its current cargo. Test cargo and attack sounds under **Options → Alerts**.
+4. Confirm each pilot's starting cargo. Click **Reset** if the hold is empty, or right-click the pilot to enter its current cargo. Test cargo, attack and rock sounds under **Options → Alerts**.
 
-![Fleet profiles with fictional pilots and the Mining drones checkbox](screenshots/02-fleet-profiles.png)
+![Fleet profiles with fictional pilots in an earlier version](screenshots/02-fleet-profiles.png)
 
-## What changed from V2.14 to V2.16
+## What changed from V2.16 to V2.18
 
-- Added the **macOS Beta** alongside the Windows download.
-- Added a German interface and automatic detection of English and German Gamelogs. Choose the interface language in **Options → Languages** and restart the monitor.
-- Fixed a boost detection issue that could leave the status on **Boost learning** during steady mining. The monitor keeps the last reliable estimate through short gaps and tolerates isolated irregular intervals.
-- Added a per-pilot **Mining drones** checkbox to keep small drone yields out of cycle and boost calculations. Those yields still count toward cargo and session totals.
-- Changed ISK/h, session value and the trend to use the **BUY value of reprocessed products** at **90.63%** yield, before fees. The price export now covers all 43 reprocessing products, including moon materials.
-- Added mined material icons to **Reprocess** and corrected its **Last Price update** date after a price import.
-- Added a dashed grey segment in **Style B** for hold space occupied by compressed ore or ice.
+- Edit ship class, hold capacity, lasers and raw cycle for multiple pilots in one step.
+- Mining yields of 50 m³ or less are automatically excluded from laser cycle and boost detection. They still count toward cargo, income and reprocessing.
+- **Mining Ledger** combines mining history from all tracked pilots, with material and UTC date filters and a local session archive.
+- **Track Rock** estimates the remaining units on a single ice or ore target and plays a dedicated three-second warning at the configured threshold.
 
-![Options Languages tab showing the English and German language choices](screenshots/03-languages.png)
+## Mining Ledger and Track Rock
+
+Open **Ledger** from the main window to see the current session and archived mining across your fleet. **New session** saves the previous session locally in **Session Logs**.
+
+Open **Track Rock** and enter the remaining unit count from your scan. The first regular yield in the chosen ICE or ORE mode identifies the material. Matching yields and logged residue reduce the estimate. Critical bonus yield counts toward cargo without depleting the target. The estimate assumes all matching yields come from the same rock and everyone mining it is tracked.
 
 ## Choose a fleet view
 
@@ -77,13 +78,13 @@ To refresh prices, go to **Options → Prices / Janice** and click **Export pric
 
 ## Sound settings
 
-Under **Options → Alerts**, choose and test separate cargo and attack sounds, adjust each volume, and save. To add your own sound, place an MP3 or WAV in **Sounds** and click **Refresh sounds**. The bundled attack clips are four seconds long. Set the cargo threshold in **Fleet profiles**.
+Under **Options → Alerts**, choose and test separate cargo, attack and rock sounds, adjust each volume, and save. To add your own sound, place an MP3 or WAV in **Sounds** and click **Refresh sounds**. The bundled attack clips are four seconds long. Set the cargo threshold in **Fleet profiles** and the rock warning threshold in **Alerts**.
 
 ![Independent cargo and attack sound selections and volume sliders in the earlier Windows interface](screenshots/03-Sound-Einstellungen.png)
 
 ## Updating and sharing
 
-Close the old version and copy **EVE-Mining.python-state.json** into the new folder beside the EXE or macOS launcher before opening V2.16. This carries over profiles, prices, cargo, preferences and session data. Copy any custom sounds you added. For migration from the C# edition, copy **EVE-Mining.native-state.json** instead; the app imports it on first launch if there is no Python state file.
+Close the old version and copy **EVE-Mining.python-state.json** into the new folder beside the EXE or macOS launcher before opening V2.18. This carries over profiles, prices, cargo, preferences and session data. Copy the **Session Logs** folder and any custom sounds you added. For migration from the C# edition, copy **EVE-Mining.native-state.json** instead; the app imports it on first launch if there is no Python state file.
 
 Share the original ZIPs to distribute a blank copy. Keep your state files and their backups private. Both ZIPs include **CHECKSUMS.txt**, instructions and third-party notices. Keep **Licenses** with any redistributed copy. All screenshots use fictional pilots and simulated mining data.
 
