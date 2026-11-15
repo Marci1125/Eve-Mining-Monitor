@@ -1,13 +1,13 @@
 # EVE Mining Monitor
 
-**V2.18 · Windows and macOS**
+**V2.18.3 · Windows and macOS**
 
-Track cargo, estimated mining income and reprocessing products across multiple EVE Online pilots. V2.18 reads English and German Gamelogs. Choose the interface language under **Options → Languages** and restart.
+Track cargo, estimated mining income and reprocessing products across multiple EVE Online pilots. The monitor reads English and German Gamelogs. Choose the interface language under **Options → Languages** and restart.
 
 | Platform | Download | Start |
 | --- | --- | --- |
-| Windows | [V2.18 Windows ZIP](https://github.com/Marci1125/Eve-Mining-Monitor/raw/refs/heads/main/EVE-Mining-V2.18-Python-Share.zip) | Extract the ZIP and run **EVE-Mining.exe**. Python is bundled. No Python installation or administrator rights are required. |
-| macOS | [V2.18 macOS ZIP](https://github.com/Marci1125/Eve-Mining-Monitor/raw/refs/heads/main/EVE-Mining-V2.18-macOS.zip) | Install [Python 3.12 with Tk](https://www.python.org/downloads/macos/), extract the ZIP and open **Start EVE Mining.command**. The first launch installs the audio dependency into a local environment. |
+| Windows | [V2.18.3 Windows ZIP](https://github.com/Marci1125/Eve-Mining-Monitor/raw/refs/heads/main/EVE-Mining-V2.18.3-Python-Share.zip) | Extract the ZIP and run **EVE-Mining.exe**. Python is bundled. No Python installation or administrator rights are required. |
+| macOS | [V2.18.3 macOS ZIP](https://github.com/Marci1125/Eve-Mining-Monitor/raw/refs/heads/main/EVE-Mining-V2.18.3-macOS.zip) | Install [Python 3.12 with Tk](https://www.python.org/downloads/macos/), extract the ZIP and open **Start EVE Mining.command**. The first launch installs the audio dependency into a local environment. |
 
 Extract the complete ZIP into a writable folder and keep the included files together. Both packages start with blank fleet profiles and no configured Gamelogs folder.
 
@@ -24,6 +24,19 @@ Extract the complete ZIP into a writable folder and keep the included files toge
 
 ![Fleet profiles with fictional pilots in an earlier version](screenshots/02-fleet-profiles.png)
 
+## What changed from V2.18 to V2.18.3
+
+- **Belt Estimate** uses complete ice cargo fills from your active fleet's Gamelogs to estimate mining time, expected cargo including critical bonuses, and time spent unloading.
+- **Track Rock** shows its remaining units below the boost estimate. A separate alarm plays when the estimate reaches zero.
+- **Ship Needs Attention** plays once a ship has shown irregular mining activity for four consecutive estimated cycles.
+- **Mining Ledger** shows recorded critical hits and bonus units by date and material. The counters start with yields read in V2.18.2 or later.
+
+## Belt Estimate
+
+Open **Belt Estimate** next to **Ledger**, paste the copied ice survey rows, and enter the fleet downtime per unload. The result shows estimated mining time, expected cargo, estimated unloading stops and total time. An ICE fleet with at least three complete cargo fills in its Gamelogs is required.
+
+![Belt Estimate with a sample ice survey, estimated mining time and unloading stops](screenshots/v2183-belt-estimate.png)
+
 ## What changed from V2.16 to V2.18
 
 - Edit ship class, hold capacity, lasers and raw cycle for multiple pilots in one step.
@@ -35,7 +48,13 @@ Extract the complete ZIP into a writable folder and keep the included files toge
 
 Open **Ledger** from the main window to see the current session and archived mining across your fleet. **New session** saves the previous session locally in **Session Logs**.
 
+The **Crits** and **Bonus units** columns follow the same date and material filters as the rest of the ledger.
+
+![Mining Ledger with Crits and Bonus units columns for a fictional fleet](screenshots/v2183-ledger-crits.png)
+
 Open **Track Rock** and enter the remaining unit count from your scan. The first regular yield in the chosen ICE or ORE mode identifies the material. Matching yields and logged residue reduce the estimate. Critical bonus yield counts toward cargo without depleting the target. The estimate assumes all matching yields come from the same rock and everyone mining it is tracked.
+
+![Track Rock remaining units below the boost estimate in the main window](screenshots/v2183-track-rock.png)
 
 ## Choose a fleet view
 
@@ -78,13 +97,13 @@ To refresh prices, go to **Options → Prices / Janice** and click **Export pric
 
 ## Sound settings
 
-Under **Options → Alerts**, choose and test separate cargo, attack and rock sounds, adjust each volume, and save. To add your own sound, place an MP3 or WAV in **Sounds** and click **Refresh sounds**. The bundled attack clips are four seconds long. Set the cargo threshold in **Fleet profiles** and the rock warning threshold in **Alerts**.
+Under **Options → Alerts**, choose and test separate sounds for cargo, incoming attacks, low rock quantity, depleted rocks and irregular mining, adjust each volume, and save. To add your own sound, place an MP3 or WAV in **Sounds** and click **Refresh sounds**. The bundled attack clips are four seconds long. Set the cargo threshold in **Fleet profiles** and the rock warning threshold in **Alerts**.
 
-![Independent cargo and attack sound selections and volume sliders in the earlier Windows interface](screenshots/03-Sound-Einstellungen.png)
+![Alerts with separate controls for rock warning, rock depletion and ship attention sounds](screenshots/v2183-alerts.png)
 
 ## Updating and sharing
 
-Close the old version and copy **EVE-Mining.python-state.json** into the new folder beside the EXE or macOS launcher before opening V2.18. This carries over profiles, prices, cargo, preferences and session data. Copy the **Session Logs** folder and any custom sounds you added. For migration from the C# edition, copy **EVE-Mining.native-state.json** instead; the app imports it on first launch if there is no Python state file.
+Close the old version and copy **EVE-Mining.python-state.json** into the new folder beside the EXE or macOS launcher before opening V2.18.3. This carries over profiles, prices, cargo, preferences and session data. Copy the **Session Logs** folder and any custom sounds you added. For migration from the C# edition, copy **EVE-Mining.native-state.json** instead; the app imports it on first launch if there is no Python state file.
 
 Share the original ZIPs to distribute a blank copy. Keep your state files and their backups private. Both ZIPs include **CHECKSUMS.txt**, instructions and third-party notices. Keep **Licenses** with any redistributed copy. All screenshots use fictional pilots and simulated mining data.
 
