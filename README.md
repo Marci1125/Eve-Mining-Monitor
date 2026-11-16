@@ -1,114 +1,131 @@
 # EVE Mining Monitor
 
-**V2.18.3 · Windows and macOS**
+**Track your EVE Online mining fleet in one window.** EVE Mining Monitor reads local Gamelogs to estimate what each ship has mined, how much cargo space is left, and when the fleet might need to unload. It also estimates reprocessing value, keeps a fleet-wide mining history, and can warn you about cargo, rocks, or ships that need attention.
 
-Track cargo, estimated mining income and reprocessing products across multiple EVE Online pilots. The monitor reads English and German Gamelogs. Choose the interface language under **Options → Languages** and restart.
+**V2.18.7** · Windows and macOS · English and German Gamelogs
 
 | Platform | Download | Start |
 | --- | --- | --- |
-| Windows | [V2.18.3 Windows ZIP](https://github.com/Marci1125/Eve-Mining-Monitor/raw/refs/heads/main/EVE-Mining-V2.18.3-Python-Share.zip) | Extract the ZIP and run **EVE-Mining.exe**. Python is bundled. No Python installation or administrator rights are required. |
-| macOS | [V2.18.3 macOS ZIP](https://github.com/Marci1125/Eve-Mining-Monitor/raw/refs/heads/main/EVE-Mining-V2.18.3-macOS.zip) | Install [Python 3.12 with Tk](https://www.python.org/downloads/macos/), extract the ZIP and open **Start EVE Mining.command**. The first launch installs the audio dependency into a local environment. |
+| Windows | [V2.18.7 Windows ZIP](https://github.com/Marci1125/Eve-Mining-Monitor/raw/refs/heads/main/EVE-Mining-V2.18.7-Python-Share.zip) | Extract the ZIP and run **EVE-Mining.exe**. Python is bundled. |
+| macOS | [V2.18.7 macOS ZIP](https://github.com/Marci1125/Eve-Mining-Monitor/raw/refs/heads/main/EVE-Mining-V2.18.7-macOS.zip) | Install Python 3.12 with Tk, extract the ZIP and open **Start EVE Mining.command**. The launcher installs the audio dependency on first launch. |
 
-Extract the complete ZIP into a writable folder and keep the included files together. Both packages start with blank fleet profiles and no configured Gamelogs folder.
+[Release history](https://github.com/Marci1125/Eve-Mining-Monitor/releases) · [Python for macOS](https://www.python.org/downloads/macos/)
 
-## Quick setup
+**User guide** · [First launch](#first-launch) · [Fleet profiles](#fleet-profiles) · [Fleet overview](#fleet-overview) · [Sessions](#sessions) · [Reprocess](#reprocess) · [Ledger](#ledger) · [Track Rock](#track-rock) · [Belt Estimate](#belt-estimate) · [Prices](#prices--janice) · [Alerts](#alerts) · [Display](#display-style) · [Languages](#languages) · [Updating](#updating-and-sharing)
 
-1. **Select your Gamelogs folder first.** Open **Options → Fleet profiles**, click **Log folder...** near the bottom, and choose the **Gamelogs** folder that contains EVE's `.txt` session logs. Once selected, the path appears beside the button. The monitor needs this folder to find pilots and track mining.
+## First launch
 
-   ![Fleet profiles showing a selected Gamelogs folder and the Log folder button](screenshots/01-gamelogs-folder.png)
+Extract the full ZIP into a writable folder. On your first launch without a profile, the tutorial highlights **Options**, guides you through selecting your Gamelogs folder and adding pilots, then introduces the main controls and settings. Use **Back** to revisit a step or **Skip tutorial** to set up on your own. The Reprocess example uses sample data.
 
-   The example path is `C:\User\Documents\Eve\logs\gamelogs`. Choose the folder where your EVE client actually writes its logs, which may be under OneDrive or a localized Documents folder.
-2. Click **Add pilots from logs**. Select several pilots and click **Edit selected**, or double-click one pilot. Set the ship class, actual in-game hold capacity, number of lasers and raw unboosted cycle time. Enter the capacity shown in EVE for that character, since skills and ship choice can change it. Set lasers to **0** for a boost-only ship. A raw cycle of **0** enables automatic learning.
-3. Name your profile, choose **ICE** or **ORE**, and click **Save and activate profile**.
-4. Confirm each pilot's starting cargo. Click **Reset** if the hold is empty, or right-click the pilot to enter its current cargo. Test cargo, attack and rock sounds under **Options → Alerts**.
+![V2.18.7 first-run tutorial with Options highlighted](screenshots/v2187-tutorial-start.png)
 
-![Fleet profiles with fictional pilots in an earlier version](screenshots/02-fleet-profiles.png)
+## Fleet profiles
 
-## What changed from V2.18 to V2.18.3
+1. Open **Options → Fleet profiles** and click **Log folder…**. Select the **Gamelogs** folder that contains EVE’s session `.txt` files. The selected path appears in the white field. On Windows, a common location is `C:\Users\<your name>\Documents\EVE\logs\Gamelogs`. Your folder may be inside OneDrive or use a localized Documents folder.
+2. Click **Add pilots from logs**. If the list stays empty, check the selected folder and open EVE to generate a Gamelog.
+3. Choose a ship class and enter its actual in-game hold capacity, active laser count, and raw unboosted cycle time. A cycle time of **0** enables automatic learning. Set lasers to **0** for a boost-only pilot.
+4. Choose **ICE** or **ORE**, name the profile, and click **Save and activate profile**.
 
-- **Belt Estimate** uses complete ice cargo fills from your active fleet's Gamelogs to estimate mining time, expected cargo including critical bonuses, and time spent unloading.
-- **Track Rock** shows its remaining units below the boost estimate. A separate alarm plays when the estimate reaches zero.
-- **Ship Needs Attention** plays once a ship has shown irregular mining activity for four consecutive estimated cycles.
-- **Mining Ledger** shows recorded critical hits and bonus units by date and material. The counters start with yields read in V2.18.2 or later.
+![Fleet profiles showing a configured Gamelogs path and the tutorial instructions for editing pilots](screenshots/v2187-fleet-setup.png)
+
+### Edit several pilots together
+
+Use **Shift** to select a range or **Ctrl** (**Command** on macOS) to select individual rows. Click **Edit selected**, set the shared ship class, capacity, lasers or cycle time, and click **Apply**. A blank field keeps its existing value for each pilot. Click **Save and activate profile** to save the changes. Double-click a row to edit one pilot.
+
+![Bulk editor applying one ship setup to six selected pilots](screenshots/v2187-bulk-edit.png)
+
+## Fleet overview
+
+Choose your fleet profile and **ICE** or **ORE** from the main window. Each pilot shows cargo, free space, an estimated time to fill, recent yield and status. **Miners free** shows remaining mining capacity across the fleet and excludes boost-only ships. **Expand** adds cycle details, and **On top** keeps the monitor above other windows.
+
+![Main overview with six pilot gauges, cargo, fleet space, boost, ISK per hour and Track Rock](screenshots/v2187-track-rock.png)
+
+- **Cargo.** The monitor converts mined units to hold volume. Logged compression adjusts the occupied volume. In ICE mode the hold counts as full when it cannot fit another whole block.
+- **Colors.** Green shows normal cargo. Yellow flags a critical yield for 30 seconds. Orange marks the configured cargo alert threshold. Red warns at 95% or when another ice block will not fit. A short highlight marks a new cargo alert.
+- **Recent yield.** A **+quantity** appears for five seconds after a mining result is read. It includes critical bonus units.
+- **Boost and ETA.** These are estimates from observed log intervals. Small yields of 50 m³ or less still count toward cargo and income. The cycle detector skips them so drone yields are less likely to distort the estimate.
+- **Manual cargo.** Use a pilot’s **Reset** after emptying that hold or **Reset all** after unloading the whole fleet. Right-click a pilot to enter or confirm the actual cargo. On macOS, use secondary click or Control-click. Jettison and transfers require a manual correction.
+- **Optional auto-reset.** Enable it in **Fleet profiles** if you fully unload after a fleet warp. It looks for a mining yield, fleet warp and a matching hangar notification. It allows final mining ticks within ten seconds of the warp.
+
+## Sessions
+
+Use **Pause session** and **Resume session** to control active session time. The monitor also pauses after five minutes without mining and resumes on the next yield. **New session** archives the previous mining totals in **Session Logs**, clears the current mining totals and timer, and keeps the cargo counters.
+
+The overview includes total mined units, estimated ISK/h, a short rate trend, and the last price update. ISK/h uses the BUY value of reprocessed products at 90.63% yield before fees. It refreshes once a minute and when session or pause state changes. For the underlying quantities and products, open **Reprocess** or **Ledger** from the same overview shown above.
+
+## Reprocess
+
+Open **Reprocess** to see the materials mined this session and their estimated reprocessing outputs, including cargo already unloaded. Set your yield and click **Calculate / refresh**. The estimate uses complete batches and whole output units and lists leftovers and unsupported materials.
+
+Quantities, volume, and available BUY or SELL values appear in the tables. Imported BUY prices take priority over bundled sample prices. The mined-material table uses compressed equivalents for price comparison.
+
+![Reprocess window showing mined materials, yield and estimated outputs](screenshots/v2187-reprocess.png)
+
+## Ledger
+
+Open **Ledger** to see the current session and saved mining history for **all tracked pilots together**. Filter by UTC date and material. The charts show quantity by material and day. The table includes quantity, volume, **Crits**, **Bonus units** and **% extra**.
+
+**% extra** compares recorded critical bonus units with the regular units mined for the same material and date. Critical counters start with logs read by V2.18.2 or later. Older saved totals can still appear without critical statistics.
+
+![Mining Ledger with date and material filters, charts and the percent extra column](screenshots/v2187-ledger-crits.png)
+
+## Track Rock
+
+Scan one target in EVE, click **Track Rock**, and enter the remaining number of units. The first regular yield in the chosen mode identifies the material. Matching yields and logged residue reduce the estimate. Critical bonus units add to your hold without depleting the rock.
+
+The remaining amount appears below the boost estimate. Use **Options → Alerts** to set the low-quantity warning threshold and a separate sound for depletion. The estimate works best when all matching yields come from one rock and the Gamelogs cover everyone mining it.
+
+![Track Rock dialog for entering the remaining units on a single target](screenshots/v2187-track-rock-setup.png)
 
 ## Belt Estimate
 
-Open **Belt Estimate** next to **Ledger**, paste the copied ice survey rows, and enter the fleet downtime per unload. The result shows estimated mining time, expected cargo, estimated unloading stops and total time. An ICE fleet with at least three complete cargo fills in its Gamelogs is required.
+Open **Belt Estimate** beside **Ledger**, paste the copied ice or ore survey rows, enter the expected minutes your fleet pauses for each unload, and click **Calculate**. The result includes mining time, expected cargo with critical bonuses, estimated unloading stops and total time.
 
-![Belt Estimate with a sample ice survey, estimated mining time and unloading stops](screenshots/v2183-belt-estimate.png)
+Choose an ICE or ORE profile that matches the scan. ICE uses complete cargo fills in your Gamelogs. ORE measures continuous mining samples by volume in m³. The estimate needs at least three qualifying samples and projects the observed rate onto the configured miners.
 
-## What changed from V2.16 to V2.18
+![Belt Estimate with a pasted survey and estimated mining time, cargo and unloading stops](screenshots/v2187-belt-estimate.png)
 
-- Edit ship class, hold capacity, lasers and raw cycle for multiple pilots in one step.
-- Mining yields of 50 m³ or less are automatically excluded from laser cycle and boost detection. They still count toward cargo, income and reprocessing.
-- **Mining Ledger** combines mining history from all tracked pilots, with material and UTC date filters and a local session archive.
-- **Track Rock** estimates the remaining units on a single ice or ore target and plays a dedicated three-second warning at the configured threshold.
+## Prices / Janice
 
-## Mining Ledger and Track Rock
+In **Options → Prices / Janice**, click **Export price item list** to create `Reprocessing-products.txt` beside the app. Appraise that list in Janice, copy the Item / Amount / Volume / Buy / Sell rows, then use **Paste price set…** to import the BUY prices. You can also double-click a material to set its BUY price manually.
 
-Open **Ledger** from the main window to see the current session and archived mining across your fleet. **New session** saves the previous session locally in **Session Logs**.
+The export includes all 43 reprocessing products, including isotopes and moon ore products. Missing quotes can leave estimates partial. **Last Price update** turns red after seven days.
 
-The **Crits** and **Bonus units** columns follow the same date and material filters as the rest of the ledger.
+![Prices and Janice tab with market price controls](screenshots/v2187-prices.png)
 
-![Mining Ledger with Crits and Bonus units columns for a fictional fleet](screenshots/v2183-ledger-crits.png)
+## Alerts
 
-Open **Track Rock** and enter the remaining unit count from your scan. The first regular yield in the chosen ICE or ORE mode identifies the material. Matching yields and logged residue reduce the estimate. Critical bonus yield counts toward cargo without depleting the target. The estimate assumes all matching yields come from the same rock and everyone mining it is tracked.
+Open **Options → Alerts** to enable, choose, test and set the volume for each sound. The available alerts cover cargo threshold, incoming attack, persistent irregular mining, low rock quantity and rock depletion. The ship attention sound waits for four consecutive estimated cycles of irregular activity.
 
-![Track Rock remaining units below the boost estimate in the main window](screenshots/v2183-track-rock.png)
+Click **Save alert settings** to apply changes. For custom audio, add an MP3 or WAV to **Sounds**, then click **Refresh sounds**. Set the cargo threshold in **Fleet profiles** and the rock threshold in **Alerts**.
 
-## Choose a fleet view
+![Alerts tab with volume and sound controls for all five alerts](screenshots/v2187-alerts.png)
 
-Open **Options → Display Style** to switch between **Style A — Bars**, **Style B — Gauges** and **Style C — Fleet Strip**. All three show cargo, recent yields, estimated time to full and individual resets. **Expand** shows detailed cycle information. The monitor remembers the selected style. Large fleets use multiple columns, and Style C packs pilots into shallow tiles. Hover over a tile for detailed cargo and cycle information.
+## Display Style
 
-**Style A — Bars**
+Use **Options → Display Style** to select **Bars**, **Gauges**, or **Fleet Strip**, then click **Apply display style**. Gauges display compressed cargo as a dashed grey segment. Fleet Strip fits more pilots into compact tiles. Hover over a tile for details.
 
-![Style A showing cargo bars for fictional pilots](screenshots/02-Style-A.png)
+![Display Style tab with Bars, Gauges and Fleet Strip previews](screenshots/v2187-display-style.png)
 
-**Style B — Gauges**
+<details>
+<summary>See Bars and Fleet Strip in the main window</summary>
 
-![Style B with color-coded cargo gauges and a dashed grey segment for compressed cargo](screenshots/04-compressed-cargo.png)
+![Bars showing individual cargo and ETA](screenshots/v2187-bars.png)
 
-**Style C — Fleet Strip**
+![Fleet Strip showing compact tiles for six pilots](screenshots/v2187-strip.png)
 
-![Style C showing 14 fictional pilots in compact cargo tiles](screenshots/06-Style-C-14-pilots.png)
+</details>
 
-Green indicates normal mining. Yellow marks a critical yield for 30 seconds. Orange marks the configured cargo alert threshold and a bright frame identifies a newly triggered alert for five seconds. Red warns at 95% or when another ice block will not fit. An ICE hold displays **100%** when no whole block fits. ORE uses each material’s volume.
+## Languages
 
-A new yield appears as **+quantity** for five seconds after the monitor reads it, including delayed log writes. Simultaneous laser yields and critical bonus units are added together. In Style B, hover over a gauge to see the tracked compressed volume.
+Use **Options → Languages** to set English or German and restart the monitor to apply the interface language. The monitor automatically recognizes English and German Gamelogs. **Restart Tutorial** replays the guided setup at any time.
 
-![Cargo alert frame and recent yield indicators in the earlier Windows interface](screenshots/02-Cargo-Alarm.png)
-
-## Reprocessing and prices
-
-Click **Reprocess** to see the current session's mined materials and estimated products, including material already unloaded. The estimate uses 462 bundled recipes and counts complete batches and whole product units. Leftovers and unsupported materials are listed. You can adjust the yield for this estimate. The main income display uses **90.63%** before fees.
-
-The input and output tables show quantities, volumes and available BUY and SELL values. Imported BUY prices take priority over dated sample prices. The monitor uses compressed equivalents to value the mined inputs in that table.
-
-![Reprocessing estimate showing mined material and output icons with quantities and valuations](screenshots/05-reprocessing-v216.png)
-
-To refresh prices, go to **Options → Prices / Janice** and click **Export price item list**. Appraise the contents of `Reprocessing-products.txt` in Janice, copy the Item / Amount / Volume / Buy / Sell rows, then use **Paste price set...**. The monitor imports BUY prices. The export includes all four isotopes and moon ore products at one unit each. You can also double-click a material to edit its BUY price. Missing prices stay unpriced and incomplete totals are marked as partial. **Last Price update** turns red after seven days.
-
-## Cargo, alerts and sessions
-
-- **Miners free** shows remaining and total capacity across mining ships, excluding boost-only ships. Logged compression frees up space while keeping the compressed volume in the hold. It leaves mined quantities and income intact.
-- Optional **cargo auto-reset** in **Fleet profiles** looks for a mining yield, a fleet warp and a matching hangar message. It accepts final yields within 10 seconds after warp. A later yield requires a new warp. Enable it if you unload the whole hold. For other transfers or jettison, reset or correct cargo manually.
-- Boost estimates, irregular mining hints and ETA use recent log intervals and account for uneven laser cycles. Boost strength can reflect a ship outside your profile, and estimates can lag changes in EVE.
-- A session pauses after five minutes without mining and resumes on the next mining yield. **New session** clears session time, income and mined totals while keeping current cargo. The main ISK/h figure refreshes once a minute and when the session or pause state changes.
-
-## Sound settings
-
-Under **Options → Alerts**, choose and test separate sounds for cargo, incoming attacks, low rock quantity, depleted rocks and irregular mining, adjust each volume, and save. To add your own sound, place an MP3 or WAV in **Sounds** and click **Refresh sounds**. The bundled attack clips are four seconds long. Set the cargo threshold in **Fleet profiles** and the rock warning threshold in **Alerts**.
-
-![Alerts with separate controls for rock warning, rock depletion and ship attention sounds](screenshots/v2183-alerts.png)
+![Languages tab with the Restart Tutorial button](screenshots/v2187-languages.png)
 
 ## Updating and sharing
 
-Close the old version and copy **EVE-Mining.python-state.json** into the new folder beside the EXE or macOS launcher before opening V2.18.3. This carries over profiles, prices, cargo, preferences and session data. Copy the **Session Logs** folder and any custom sounds you added. For migration from the C# edition, copy **EVE-Mining.native-state.json** instead; the app imports it on first launch if there is no Python state file.
+Close the old version, extract the new ZIP into a writable folder, and copy **EVE-Mining.python-state.json**, **Session Logs**, and any custom sounds you want to keep into the new folder. Put the state file beside the Windows EXE or macOS launcher. Use the original ZIP when sharing a fresh copy. The ZIP includes **CHECKSUMS.txt** and third-party notices.
 
-Share the original ZIPs to distribute a blank copy. Keep your state files and their backups private. Both ZIPs include **CHECKSUMS.txt**, instructions and third-party notices. Keep **Licenses** with any redistributed copy. All screenshots use fictional pilots and simulated mining data.
+The monitor reads local Gamelogs and uses bundled or manually imported prices. It does not automate gameplay or make market requests. The Windows build extracts its bundled Python runtime into the temporary directory at launch. Reprocessing data and additional item icons come from CCP’s static data and EVE Image Server.
 
-## Local operation and included data
-
-The monitor reads the configured local Gamelogs folder and uses bundled or imported prices, sounds, recipes and icons. It does not control EVE, automate gameplay, fetch market prices or check for app updates. The Windows build uses Python, Tkinter and PyInstaller. Its bundled runtime extracts to the Windows temporary directory at startup. The macOS launcher downloads its audio dependency on first launch.
-
-Reprocessing data comes from CCP’s EVE static data. Additional item icons come from the EVE Image Server and are bundled for offline use.
+Screenshots use fictional pilots and sample mining data from V2.18.7.
