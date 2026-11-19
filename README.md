@@ -2,22 +2,31 @@
 
 **Track your EVE Online mining fleet in one window.** EVE Mining Monitor reads local Gamelogs to estimate what each ship has mined, how much cargo space is left, and when the fleet might need to unload. It also estimates reprocessing value, keeps a fleet-wide mining history, and can warn you about cargo, rocks, or ships that need attention.
 
-**V2.18.7** · Windows and macOS · English and German Gamelogs
+**V2.18.10** · Windows and macOS · English and German Gamelogs
 
 | Platform | Download | Start |
 | --- | --- | --- |
-| Windows | [V2.18.7 Windows ZIP](https://github.com/Marci1125/Eve-Mining-Monitor/raw/refs/heads/main/EVE-Mining-V2.18.7-Python-Share.zip) | Extract the ZIP and run **EVE-Mining.exe**. Python is bundled. |
-| macOS | [V2.18.7 macOS ZIP](https://github.com/Marci1125/Eve-Mining-Monitor/raw/refs/heads/main/EVE-Mining-V2.18.7-macOS.zip) | Install Python 3.12 with Tk, extract the ZIP and open **Start EVE Mining.command**. The launcher installs the audio dependency on first launch. |
+| Windows | [V2.18.10 Windows ZIP](https://github.com/Marci1125/Eve-Mining-Monitor/releases/download/v2.18.10/EVE-Mining-V2.18.10-Python-Share.zip) | Extract the ZIP and run **EVE-Mining.exe**. Python is bundled. |
+| macOS | [V2.18.10 macOS ZIP](https://github.com/Marci1125/Eve-Mining-Monitor/releases/download/v2.18.10/EVE-Mining-V2.18.10-macOS.zip) | Install Python 3.12 with Tk, extract the ZIP and open **Start EVE Mining.command**. The launcher installs the audio dependency on first launch. |
 
 [Release history](https://github.com/Marci1125/Eve-Mining-Monitor/releases) · [Python for macOS](https://www.python.org/downloads/macos/)
 
 **User guide** · [First launch](#first-launch) · [Fleet profiles](#fleet-profiles) · [Fleet overview](#fleet-overview) · [Sessions](#sessions) · [Reprocess](#reprocess) · [Ledger](#ledger) · [Track Rock](#track-rock) · [Belt Estimate](#belt-estimate) · [Prices](#prices--janice) · [Alerts](#alerts) · [Display](#display-style) · [Languages](#languages) · [Updating](#updating-and-sharing)
 
+## What changed from V2.18.7 to V2.18.10
+
+- Added material icons and colors throughout the Mining Ledger.
+- Highlighted critical bonus units in yellow for ice and turquoise for ore.
+- Expanded the horizontal material chart to include every material in the selection.
+- Added **All materials**, **Ice materials**, **Ore materials**, and individual material filters.
+- Added a **Current session** toggle alongside the UTC date controls.
+- Set the default date range to seven days ago through today.
+
 ## First launch
 
 Extract the full ZIP into a writable folder. On your first launch without a profile, the tutorial highlights **Options**, guides you through selecting your Gamelogs folder and adding pilots, then introduces the main controls and settings. Use **Back** to revisit a step or **Skip tutorial** to set up on your own. The Reprocess example uses sample data.
 
-![V2.18.7 first-run tutorial with Options highlighted](screenshots/v2187-tutorial-start.png)
+![V2.18.10 first-run tutorial with Options highlighted](screenshots/v21810-tutorial-start.png)
 
 ## Fleet profiles
 
@@ -26,19 +35,19 @@ Extract the full ZIP into a writable folder. On your first launch without a prof
 3. Choose a ship class and enter its actual in-game hold capacity, active laser count, and raw unboosted cycle time. A cycle time of **0** enables automatic learning. Set lasers to **0** for a boost-only pilot.
 4. Choose **ICE** or **ORE**, name the profile, and click **Save and activate profile**.
 
-![Fleet profiles showing a configured Gamelogs path and the tutorial instructions for editing pilots](screenshots/v2187-fleet-setup.png)
+![Fleet profiles showing a configured Gamelogs path and the tutorial instructions for editing pilots](screenshots/v21810-fleet-setup.png)
 
 ### Edit several pilots together
 
 Use **Shift** to select a range or **Ctrl** (**Command** on macOS) to select individual rows. Click **Edit selected**, set the shared ship class, capacity, lasers or cycle time, and click **Apply**. A blank field keeps its existing value for each pilot. Click **Save and activate profile** to save the changes. Double-click a row to edit one pilot.
 
-![Bulk editor applying one ship setup to six selected pilots](screenshots/v2187-bulk-edit.png)
+![Bulk editor applying one ship setup to six selected pilots](screenshots/v21810-bulk-edit.png)
 
 ## Fleet overview
 
 Choose your fleet profile and **ICE** or **ORE** from the main window. Each pilot shows cargo, free space, an estimated time to fill, recent yield and status. **Miners free** shows remaining mining capacity across the fleet and excludes boost-only ships. **Expand** adds cycle details, and **On top** keeps the monitor above other windows.
 
-![Main overview with six pilot gauges, cargo, fleet space, boost, ISK per hour and Track Rock](screenshots/v2187-track-rock.png)
+![Main overview with six pilot gauges, cargo, fleet space, boost, ISK per hour and Track Rock](screenshots/v21810-track-rock.png)
 
 - **Cargo.** The monitor converts mined units to hold volume. Logged compression adjusts the occupied volume. In ICE mode the hold counts as full when it cannot fit another whole block.
 - **Colors.** Green shows normal cargo. Yellow flags a critical yield for 30 seconds. Orange marks the configured cargo alert threshold. Red warns at 95% or when another ice block will not fit. A short highlight marks a new cargo alert.
@@ -59,15 +68,21 @@ Open **Reprocess** to see the materials mined this session and their estimated r
 
 Quantities, volume, and available BUY or SELL values appear in the tables. Imported BUY prices take priority over bundled sample prices. The mined-material table uses compressed equivalents for price comparison.
 
-![Reprocess window showing mined materials, yield and estimated outputs](screenshots/v2187-reprocess.png)
+![Reprocess window showing mined materials, yield and estimated outputs](screenshots/v21810-reprocess.png)
 
 ## Ledger
 
-Open **Ledger** to see the current session and saved mining history for **all tracked pilots together**. Filter by UTC date and material. The charts show quantity by material and day. The table includes quantity, volume, **Crits**, **Bonus units** and **% extra**.
+Open **Ledger** to see mining totals for **all tracked pilots together**. The default date range runs from seven days ago to today in UTC. You can edit **From (UTC)** and **To (UTC)**, or click **Current session** to show the active session across all pilots, including a session that spans midnight. Click it again to return to the date range.
 
-**% extra** compares recorded critical bonus units with the regular units mined for the same material and date. Critical counters start with logs read by V2.18.2 or later. Older saved totals can still appear without critical statistics.
+Use **All materials**, **Ice materials**, **Ore materials**, or an individual material to filter both charts, the table and the totals. Moon ore is included in **Ore materials**.
 
-![Mining Ledger with date and material filters, charts and the percent extra column](screenshots/v2187-ledger-crits.png)
+The horizontal chart shows every material in the selection, sorted by quantity, with its icon and a consistent color. The chart grows with the list. For a list longer than the available screen height, scroll within the chart to reach the remaining materials.
+
+**Critical bonus units are included in the total bar length.** Their share is highlighted at the right end in yellow for ice and turquoise for ore. The daily chart uses the same colors and bonus highlights. Hover over a chart to see quantities and critical bonus units.
+
+The table includes quantity, volume, **Crits**, **Bonus units** and **% extra**. **% extra** is the critical bonus divided by the regular quantity mined for that date and material. Critical counters start with logs read by V2.18.2 or later. Older saved totals can still appear without critical statistics.
+
+![V2.18.10 Mining Ledger with the ice filter, material icons, colored bars, critical bonus highlights and UTC date controls](screenshots/v21810-ledger-crits.png)
 
 ## Track Rock
 
@@ -75,7 +90,7 @@ Scan one target in EVE, click **Track Rock**, and enter the remaining number of 
 
 The remaining amount appears below the boost estimate. Use **Options → Alerts** to set the low-quantity warning threshold and a separate sound for depletion. The estimate works best when all matching yields come from one rock and the Gamelogs cover everyone mining it.
 
-![Track Rock dialog for entering the remaining units on a single target](screenshots/v2187-track-rock-setup.png)
+![Track Rock dialog for entering the remaining units on a single target](screenshots/v21810-track-rock-setup.png)
 
 ## Belt Estimate
 
@@ -83,7 +98,7 @@ Open **Belt Estimate** beside **Ledger**, paste the copied ice or ore survey row
 
 Choose an ICE or ORE profile that matches the scan. ICE uses complete cargo fills in your Gamelogs. ORE measures continuous mining samples by volume in m³. The estimate needs at least three qualifying samples and projects the observed rate onto the configured miners.
 
-![Belt Estimate with a pasted survey and estimated mining time, cargo and unloading stops](screenshots/v2187-belt-estimate.png)
+![Belt Estimate with a pasted survey and estimated mining time, cargo and unloading stops](screenshots/v21810-belt-estimate.png)
 
 ## Prices / Janice
 
@@ -91,7 +106,7 @@ In **Options → Prices / Janice**, click **Export price item list** to create `
 
 The export includes all 43 reprocessing products, including isotopes and moon ore products. Missing quotes can leave estimates partial. **Last Price update** turns red after seven days.
 
-![Prices and Janice tab with market price controls](screenshots/v2187-prices.png)
+![Prices and Janice tab with market price controls](screenshots/v21810-prices.png)
 
 ## Alerts
 
@@ -99,20 +114,20 @@ Open **Options → Alerts** to enable, choose, test and set the volume for each 
 
 Click **Save alert settings** to apply changes. For custom audio, add an MP3 or WAV to **Sounds**, then click **Refresh sounds**. Set the cargo threshold in **Fleet profiles** and the rock threshold in **Alerts**.
 
-![Alerts tab with volume and sound controls for all five alerts](screenshots/v2187-alerts.png)
+![Alerts tab with volume and sound controls for all five alerts](screenshots/v21810-alerts.png)
 
 ## Display Style
 
 Use **Options → Display Style** to select **Bars**, **Gauges**, or **Fleet Strip**, then click **Apply display style**. Gauges display compressed cargo as a dashed grey segment. Fleet Strip fits more pilots into compact tiles. Hover over a tile for details.
 
-![Display Style tab with Bars, Gauges and Fleet Strip previews](screenshots/v2187-display-style.png)
+![Display Style tab with Bars, Gauges and Fleet Strip previews](screenshots/v21810-display-style.png)
 
 <details>
 <summary>See Bars and Fleet Strip in the main window</summary>
 
-![Bars showing individual cargo and ETA](screenshots/v2187-bars.png)
+![Bars showing individual cargo and ETA](screenshots/v21810-bars.png)
 
-![Fleet Strip showing compact tiles for six pilots](screenshots/v2187-strip.png)
+![Fleet Strip showing compact tiles for six pilots](screenshots/v21810-strip.png)
 
 </details>
 
@@ -120,7 +135,7 @@ Use **Options → Display Style** to select **Bars**, **Gauges**, or **Fleet Str
 
 Use **Options → Languages** to set English or German and restart the monitor to apply the interface language. The monitor automatically recognizes English and German Gamelogs. **Restart Tutorial** replays the guided setup at any time.
 
-![Languages tab with the Restart Tutorial button](screenshots/v2187-languages.png)
+![Languages tab with the Restart Tutorial button](screenshots/v21810-languages.png)
 
 ## Updating and sharing
 
@@ -128,4 +143,4 @@ Close the old version, extract the new ZIP into a writable folder, and copy **EV
 
 The monitor reads local Gamelogs and uses bundled or manually imported prices. It does not automate gameplay or make market requests. The Windows build extracts its bundled Python runtime into the temporary directory at launch. Reprocessing data and additional item icons come from CCP’s static data and EVE Image Server.
 
-Screenshots use fictional pilots and sample mining data from V2.18.7.
+Screenshots show V2.18.10. The Ledger screenshot shows a real mining history. Other screenshots use fictional pilots and sample mining data.
