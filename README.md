@@ -2,25 +2,24 @@
 
 **Track your EVE Online mining fleet in one window.** EVE Mining Monitor reads local Gamelogs to estimate what each ship has mined, how much cargo space is left, and when the fleet might need to unload. It also estimates reprocessing value, keeps a fleet-wide mining history, and can warn you about cargo, rocks, or ships that need attention.
 
-**V2.18.10** · Windows and macOS · English and German Gamelogs
+**V2.18.13** · Windows and macOS · English and German Gamelogs
 
 | Platform | Download | Start |
 | --- | --- | --- |
-| Windows | [V2.18.10 Windows ZIP](https://github.com/Marci1125/Eve-Mining-Monitor/releases/download/v2.18.10/EVE-Mining-V2.18.10-Python-Share.zip) | Extract the ZIP and run **EVE-Mining.exe**. Python is bundled. |
-| macOS | [V2.18.10 macOS ZIP](https://github.com/Marci1125/Eve-Mining-Monitor/releases/download/v2.18.10/EVE-Mining-V2.18.10-macOS.zip) | Install Python 3.12 with Tk, extract the ZIP and open **Start EVE Mining.command**. The launcher installs the audio dependency on first launch. |
+| Windows | [V2.18.13 Windows ZIP](https://github.com/Marci1125/Eve-Mining-Monitor/releases/download/v2.18.13/EVE-Mining-V2.18.13-Python-Share.zip) | Extract the ZIP and run **EVE-Mining.exe**. Python is bundled. |
+| macOS | [V2.18.13 macOS ZIP](https://github.com/Marci1125/Eve-Mining-Monitor/releases/download/v2.18.13/EVE-Mining-V2.18.13-macOS.zip) | Install Python 3.12 with Tk, extract the ZIP and open **Start EVE Mining.command**. The launcher installs the audio dependency on first launch. |
 
 [Release history](https://github.com/Marci1125/Eve-Mining-Monitor/releases) · [Python for macOS](https://www.python.org/downloads/macos/)
 
-**User guide** · [First launch](#first-launch) · [Fleet profiles](#fleet-profiles) · [Fleet overview](#fleet-overview) · [Sessions](#sessions) · [Reprocess](#reprocess) · [Ledger](#ledger) · [Track Rock](#track-rock) · [Belt Estimate](#belt-estimate) · [Prices](#prices--janice) · [Alerts](#alerts) · [Display](#display-style) · [Languages](#languages) · [Updating](#updating-and-sharing)
+**User guide** · [First launch](#first-launch) · [Fleet profiles](#fleet-profiles) · [Fleet overview](#fleet-overview) · [Sessions](#sessions) · [Reprocess](#reprocess) · [Ledger](#ledger) · [Track Rock](#track-rock) · [Belt Estimate](#belt-estimate) · [Prices](#prices--janice) · [Alerts](#alerts) · [Display](#display-style) · [Languages](#languages) · [Update notifications](#update-notifications) · [Updating](#updating-and-sharing)
 
-## What changed from V2.18.7 to V2.18.10
+## What changed from V2.18.10 to V2.18.13
 
-- Added material icons and colors throughout the Mining Ledger.
-- Highlighted critical bonus units in yellow for ice and turquoise for ore.
-- Expanded the horizontal material chart to include every material in the selection.
-- Added **All materials**, **Ice materials**, **Ore materials**, and individual material filters.
-- Added a **Current session** toggle alongside the UTC date controls.
-- Set the default date range to seven days ago through today.
+- Added saved belt reference scans and remaining percentages overall and by material.
+- Added completion-time comparisons for Porpoise, Orca and Rorqual boosts.
+- Added optional GitHub release checks at startup, enabled by default, and a manual **Check now** button.
+- Added **Options → Updates**, a release notification and a clickable update link in the main window.
+- Extended the English and German tutorial to introduce the update settings.
 
 ## First launch
 
@@ -94,11 +93,33 @@ The remaining amount appears below the boost estimate. Use **Options → Alerts*
 
 ## Belt Estimate
 
-Open **Belt Estimate** beside **Ledger**, paste the copied ice or ore survey rows, enter the expected minutes your fleet pauses for each unload, and click **Calculate**. The result includes mining time, expected cargo with critical bonuses, estimated unloading stops and total time.
+Open **Belt Estimate** beside **Ledger** and paste a complete ice or ore survey scan.
 
-Choose an ICE or ORE profile that matches the scan. ICE uses complete cargo fills in your Gamelogs. ORE measures continuous mining samples by volume in m³. The estimate needs at least three qualifying samples and projects the observed rate onto the configured miners.
+<img width="572" height="590" alt="Belt Estimate with saved scan percentages and Porpoise, Orca and Rorqual time comparisons" src="https://github.com/user-attachments/assets/15d69ab9-ea18-44e4-a1fd-226caa13d211" />
 
-![Belt Estimate with a pasted survey and estimated mining time, cargo and unloading stops](screenshots/v21810-belt-estimate.png)
+### Reference scans and remaining percentage
+
+Click **Compare scan** to compare the pasted survey with the saved reference. The result shows the total remaining amount and a breakdown by material. The comparison can be used independently of the mining-time calculation.
+
+Use **Use scan as 100%** to save a reference for the current ICE or ORE mode. Paste a newer complete scan from the same belt to measure its remaining percentage. References are saved locally. An observed ICE reference is included with the tool.
+
+The percentage is relative to the saved scan. Its initial spawn quantity is unverified. Choose a fresh, complete scan from your own belt for the closest comparison. The tool flags materials missing from the reference and quantities above the reference.
+
+### Mining time and boost comparison
+
+Choose a fleet profile matching the scan, enter the expected minutes your fleet pauses for each unload, and click **Calculate**. The result includes mining time, expected cargo with critical bonuses, unloading stops and total time.
+
+The log-based estimate uses qualifying historical runs from the selected Gamelogs folder, which can include different boosts. ICE uses complete cargo fills. ORE measures continuous mining samples by volume in m³. At least three qualifying samples are needed.
+
+The additional boost comparison normalizes stable laser samples using the raw cycle times in your fleet profile. Enter the raw unboosted cycle for every miner and use logs from a matching ship setup. Each row shows mining time and total time including unloads.
+
+| Reference boost | Assumed setup | Cycle reduction |
+| --- | --- | --- |
+| Porpoise | Max skills, Burst II, mindlink, core off | 38.67% |
+| Orca | Max skills, Burst II, mindlink, T2 core active | 46.49% |
+| Rorqual | Max skills, Burst II, mindlink, T2 core active | 61.52% |
+
+Critical bonus units affect cargo and unloading estimates. Detected small drone yields retain their observed rate. If the raw cycles or stable samples are missing, the tool shows a message for the boost comparison.
 
 ## Prices / Janice
 
@@ -137,10 +158,22 @@ Use **Options → Languages** to set English or German and restart the monitor t
 
 ![Languages tab with the Restart Tutorial button](screenshots/v21810-languages.png)
 
+## Update notifications
+
+The monitor checks this repository's latest published release at startup and compares its version with the installed version. Startup checks are **enabled by default**.
+
+When a newer release is available, a small notification offers **View update**, which opens the GitHub release page with the changelog and Windows and macOS downloads. The version label in the main window also becomes a clickable update link.
+
+<img width="619" height="304" alt="Update available notification linking to the GitHub release" src="https://github.com/user-attachments/assets/232a70eb-e1e5-47d3-bb31-d8fa4f164899" />
+
+Under **Options → Updates**, turn **Check for updates on startup** on or off, or click **Check now** to run a manual check. The choice is saved locally. The check runs in the background. Connection failures appear in the update settings.
+
+Checks use GitHub's public Releases API and need an internet connection. Users of an earlier version must install V2.18.13 or later once to receive these notifications.
+
 ## Updating and sharing
 
 Close the old version, extract the new ZIP into a writable folder, and copy **EVE-Mining.python-state.json**, **Session Logs**, and any custom sounds you want to keep into the new folder. Put the state file beside the Windows EXE or macOS launcher. Use the original ZIP when sharing a fresh copy. The ZIP includes **CHECKSUMS.txt** and third-party notices.
 
-The monitor reads local Gamelogs and uses bundled or manually imported prices. It does not automate gameplay or make market requests. The Windows build extracts its bundled Python runtime into the temporary directory at launch. Reprocessing data and additional item icons come from CCP’s static data and EVE Image Server.
+The monitor reads local Gamelogs and uses bundled or manually imported prices. Optional release checks request public GitHub release information. View update opens the release page in your browser. The Windows build extracts its bundled Python runtime into the temporary directory at launch. Reprocessing data and additional item icons come from CCP’s static data and EVE Image Server.
 
-Screenshots show V2.18.10. The Ledger screenshot shows a real mining history. Other screenshots use fictional pilots and sample mining data.
+The Belt Estimate and update notification images show V2.18.13. Other screenshots illustrate the corresponding V2.18.10 views. The Ledger screenshot shows real mining history.
